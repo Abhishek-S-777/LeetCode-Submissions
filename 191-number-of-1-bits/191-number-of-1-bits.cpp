@@ -8,7 +8,6 @@ public:
             if(n&1){
                 count ++;
             }
-            
             n = n>>1;
         }
         return count;
