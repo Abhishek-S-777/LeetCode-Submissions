@@ -1,30 +1,41 @@
 class Solution {
 public:
     bool uniqueOccurrences(vector<int>& arr) {
-        vector<int> ans;
-        int size = arr.size();
-        int i = 0;
-        sort(arr.begin(),arr.end());
-        while(i<size){
+            vector<int> countArr;
+            bool isUnique;
+            sort(arr.begin(), arr.end());
+            for(int i = 0; i<arr.size(); i++){
             int count = 1;
-            for(int j =i+1;j<size;j++){
-                if(arr[i]==arr[j]){
-                    count++;
-                }
-                else{
-                    break;
+            for(int j = i+1; j<arr.size(); j++){
+                if(arr[i] == arr[j]){
+                    count += 1;
                 }
             }
-            ans.push_back(count);
-            i = i+count;
-        }
-        size = ans.size();
-        sort(ans.begin(),ans.end());
-        for(int i = 0;i<size-1;i++){
-            if(ans[i]==ans[i+1]){
-                return false;
+            countArr.push_back(count);
+            i += count-1;
+          }
+
+            sort(countArr.begin(), countArr.end());
+
+            for(int i = 0; i < countArr.size(); i++){
+            int count = 1;
+            for(int j = i+1; j < countArr.size(); j++){
+                if(countArr[i] == countArr[j]){
+                    count += 1;
+                }
             }
+            if(count == 1){
+                isUnique = true;
+                // return true;
+            }
+            else{
+                isUnique = false;
+                // return false;
+                break;
+                
+            }
+            i += count-1;
         }
-        return true;   
+        return isUnique;
     }
 };
